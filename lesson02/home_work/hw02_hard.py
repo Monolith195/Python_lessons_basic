@@ -4,7 +4,8 @@
 equation = 'y = -12x + 11111140.2121'
 x = 2.5
 # вычислите и выведите y
-
+split = equation.split()
+print(float(split[2][0:3]) * x + float(split[4]))
 
 # Задание-2: Дата задана в виде строки формата 'dd.mm.yyyy'.
 # Проверить, корректно ли введена дата.
@@ -24,6 +25,27 @@ date = '01.22.1001'
 date = '1.12.1001'
 date = '-2.10.3001'
 
+
+def is_date_correct(date):
+    day, month, year = [abs(int(n)) for n in date.split(".")]
+
+    def check_days_in_month(months):
+        if months == 2:
+            return 28
+        elif months in [1, 3, 5, 7, 8, 10, 12]:
+            return 31
+        elif months in [4, 6, 9, 11]:
+            return 30
+        else:
+            return 0
+
+    if 1 <= day <= check_days_in_month(month) and 1 <= month <= 12 and 1 <= year <= 9999:
+        return True
+    else:
+        return False
+
+
+print(is_date_correct(date))
 
 # Задание-3: "Перевёрнутая башня" (Задача олимпиадного уровня)
 #
