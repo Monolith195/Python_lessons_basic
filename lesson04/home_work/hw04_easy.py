@@ -6,9 +6,19 @@
 # квадратами элементов исходного списка
 # [1, 2, 4, 0] --> [1, 4, 16, 0]
 
+import random
+
+x = [1, 2, 4, 0]
+y = [i * i for i in x]
+
 # Задание-2:
 # Даны два списка фруктов.
 # Получить список фруктов, присутствующих в обоих исходных списках.
+
+fruits_a = ["Bilberry", "Blackberry", "Blueberry", "Boysenberry", "Cherry"]
+fruits_b = ["Cherry", "Blackcurrant", "Bilberry", "Boysenberry", "Currant"]
+
+fruits = [i for i in fruits_a if i in fruits_b]
 
 # Задание-3:
 # Дан список, заполненный произвольными числами.
@@ -16,3 +26,6 @@
 # + Элемент кратен 3
 # + Элемент положительный
 # + Элемент не кратен 4
+
+x = [random.randint(-10, 10) for i in range(10)]
+y = [i for i in x if i % 3 == 0 and i > 0 and i % 4 != 0]
