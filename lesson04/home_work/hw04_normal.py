@@ -1,53 +1,80 @@
-# Задание-1:
-# Вывести символы в нижнем регистре, которые находятся вокруг
-# 1 или более символов в верхнем регистре.
-# Т.е. из строки "mtMmEZUOmcq" нужно получить ['mt', 'm', 'mcq']
-# Решить задачу двумя способами: с помощью re и без.
+# Эти задачи необходимо решить используя регулярные выражения!
 
-line = 'mtMmEZUOmcqWiryMQhhTxqKdSTKCYEJlEZCsGAMkgAYEOmHBSQsSUHKvSfbmxULaysmNO'\
-       'GIPHpEMujalpPLNzRWXfwHQqwksrFeipEUlTLeclMwAoktKlfUBJHPsnawvjPhfgewVzK'\
-       'TUfSYtBydXaVIpxWjNKgXANvIoumesCSSvjEGRJosUfuhRRDUuTQwLlJJJDdkVjfSAHqn'\
-       'LxooisBDWuxIhyjJaXDYwdoVPnsllMngNlmkpYOlqXEFIxPqqqgAWdJsOvqppOfyIVjXa'\
-       'pzGOrfinzzsNMtBIOclwbfRzytmDgEFUzxvZGkdOaQYLVBfsGSAfJMchgBWAsGnBnWete'\
-       'kUTVuPluKRMQsdelzBgLzuwiimqkFKpyQRzOUyHkXRkdyIEBvTjdByCfkVIAQaAbfCvzQ'\
-       'WrMMsYpLtdqRltXPqcSMXJIvlBzKoQnSwPFkapxGqnZCVFfKRLUIGBLOwhchWCdJbRuXb'\
-       'JrwTRNyAxDctszKjSnndaFkcBZmJZWjUeYMdevHhBJMBSShDqbjAuDGTTrSXZywYkmjCC'\
-       'EUZShGofaFpuespaZWLFNIsOqsIRLexWqTXsOaScgnsUKsJxiihwsCdBViEQBHQaOnLfB'\
-       'tQQShTYHFqrvpVFiiEFMcIFTrTkIBpGUflwTvAzMUtmSQQZGHlmQKJndiAXbIzVkGSeuT'\
-       'SkyjIGsiWLALHUCsnQtiOtrbQOQunurZgHFiZjWtZCEXZCnZjLeMiFlxnPkqfJFbCfKCu'\
-       'UJmGYJZPpRBFNLkqigxFkrRAppYRXeSCBxbGvqHmlsSZMWSVQyzenWoGxyGPvbnhWHuXB'\
-       'qHFjvihuNGEEFsfnMXTfptvIOlhKhyYwxLnqOsBdGvnuyEZIheApQGOXWeXoLWiDQNJFa'\
-       'XiUWgsKQrDOeZoNlZNRvHnLgCmysUeKnVJXPFIzvdDyleXylnKBfLCjLHntltignbQoiQ'\
-       'zTYwZAiRwycdlHfyHNGmkNqSwXUrxGc'
+# Задача - 1
+# Запросите у пользователя имя, фамилию, email. Теперь необходимо совершить проверки, имя и фамилия должны иметь заглавные первые буквы.
+# email - не должен иметь заглавных букв и должен быть в формате: текст в нижнем регистре, допускается нижнее подчеркивание и цифры, потом @, потом текст, допускаются цифры, точка, ru или org или com.
+# Например:
+# Пупкин василий - неверно указано имя, te$T@test.net - неверно указан email (спецсимвол, заглавная буква, .net), te_4_st@test.com - верно указан.
 
+import re
 
-# Задание-2:
-# Вывести символы в верхнем регистре, слева от которых находятся
-# два символа в нижнем регистре, а справа - два символа в верхнем регистре.
-# Т.е. из строки 
-# "GAMkgAYEOmHBSQsSUHKvSfbmxULaysmNOGIPHpEMujalpPLNzRWXfwHQqwksrFeipEUlTLec"
-# нужно получить список строк: ['AY', 'NOGI', 'P']
-# Решить задачу двумя способами: с помощью re и без.
+name = input("Введите имя: ")
+family_name = input("Введите фамилию: ")
+email = input("Введите e-mail: ")
 
-line_2 = 'mtMmEZUOmcqWiryMQhhTxqKdSTKCYEJlEZCsGAMkgAYEOmHBSQsSUHKvSfbmxULaysm'\
-       'NOGIPHpEMujalpPLNzRWXfwHQqwksrFeipEUlTLeclMwAoktKlfUBJHPsnawvjPhfgewV'\
-       'fzKTUfSYtBydXaVIpxWjNKgXANvIoumesCSSvjEGRJosUfuhRRDUuTQwLlJJJDdkVjfSA'\
-       'HqnLxooisBDWuxIhyjJaXDYwdoVPnsllMngNlmkpYOlqXEFIxPqqqgAWdJsOvqppOfyIV'\
-       'jXapzGOrfinzzsNMtBIOclwbfRzytmDgEFUzxvZGkdOaQYLVBfsGSAfJMchgBWAsGnBnW'\
-       'etekUTVuPluKRMQsdelzBgLzuwiimqkFKpyQRzOUyHkXRkdyIEBvTjdByCfkVIAQaAbfC'\
-       'vzQWrMMsYpLtdqRltXPqcSMXJIvlBzKoQnSwPFkapxGqnZCVFfKRLUIGBLOwhchWCdJbR'\
-       'uXbJrwTRNyAxDctszKjSnndaFkcBZmJZWjUeYMdevHhBJMBSShDqbjAuDGTTrSXZywYkm'\
-       'jCCEUZShGofaFpuespaZWLFNIsOqsIRLexWqTXsOaScgnsUKsJxiihwsCdBViEQBHQaOn'\
-       'LfBtQQShTYHFqrvpVFiiEFMcIFTrTkIBpGUflwTvAzMUtmSQQZGHlmQKJndiAXbIzVkGS'\
-       'euTSkyjIGsiWLALHUCsnQtiOtrbQOQunurZgHFiZjWtZCEXZCnZjLeMiFlxnPkqfJFbCf'\
-       'KCuUJmGYJZPpRBFNLkqigxFkrRAppYRXeSCBxbGvqHmlsSZMWSVQyzenWoGxyGPvbnhWH'\
-       'uXBqHFjvihuNGEEFsfnMXTfptvIOlhKhyYwxLnqOsBdGvnuyEZIheApQGOXWeXoLWiDQN'\
-       'JFaXiUWgsKQrDOeZoNlZNRvHnLgCmysUeKnVJXPFIzvdDyleXylnKBfLCjLHntltignbQ'\
-       'oiQzTYwZAiRwycdlHfyHNGmkNqSwXUrxGC'
+name_or_family_pattern = '^[А-Я]{1}[а-я]+$'
+email_pattern = '^[a-z_0-9]+@[a-z0-9]+\.[ru|com|org]+$'
 
-# Задание-3:
-# Напишите скрипт, заполняющий указанный файл (самостоятельно задайте имя файла)
-# произвольными целыми цифрами, в результате в файле должно быть
-# 2500-значное произвольное число.
-# Найдите и выведите самую длинную последовательность одинаковых цифр
-# в вышезаполненном файле.
+name_match = re.match(name_or_family_pattern, name)
+family_match = re.match(name_or_family_pattern, family_name)
+email_match = re.match(email_pattern, email)
+
+if name_match:
+    print(name_match.group())
+else:
+    print("Неверно указано имя")
+
+if family_match:
+    print(family_match.group())
+else:
+    print("Неверно указана фамилия")
+
+if email_match:
+    print(email_match.group())
+else:
+    print("Неверно указан e-mail")
+
+# Задача - 2:
+# Вам дан текст:
+
+some_str = '''
+Мороз и солнце; день чудесный!
+Еще ты дремлешь, друг прелестный —
+Пора, красавица, проснись:
+Открой сомкнуты негой взоры
+Навстречу северной Авроры,
+Звездою севера явись!
+Вечор, ты помнишь, вьюга злилась,
+На мутном небе мгла носилась;
+Луна, как бледное пятно,
+Сквозь тучи мрачные желтела,
+И ты печальная сидела —
+А нынче... погляди в окно:
+Под голубыми небесами
+Великолепными коврами,
+Блестя на солнце, снег лежит;
+Прозрачный лес один чернеет,
+И ель сквозь иней зеленеет,
+И речка подо льдом блестит.
+Вся комната янтарным блеском
+Озарена. Веселым треском
+Трещит затопленная печь.
+Приятно думать у лежанки.
+Но знаешь: не велеть ли в санки
+Кобылку бурую запречь?
+Скользя по утреннему снегу,
+Друг милый, предадимся бегу
+Нетерпеливого коня
+И навестим поля пустые,
+Леса, недавно столь густые,
+И берег, милый для меня.'''
+
+# Необходимо с помощью регулярных выражений определить есть ли в тексте подряд
+# более одной точки, при любом исходе сообщите результат пользователю!
+
+dots_pattern = '[\.]{2,}'
+
+if re.findall(dots_pattern, some_str):
+    print("В тексте есть более одной точки подряд")
+else:
+    print("В тексте нет более одной точки подряд")
