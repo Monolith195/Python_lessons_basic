@@ -28,16 +28,20 @@ class Car:
 
 
 class TownCar(Car):
-    pass
+    def __init__(self, speed, color, name, is_police):
+        Car.__init__(self, speed, color, name, is_police)
 
 
 class SportCar(Car):
-    pass
+    def __init__(self, speed, color, name, is_police):
+        Car.__init__(self, speed, color, name, is_police)
 
 
 class WorkCar(Car):
-    pass
+    def __init__(self, speed, color, name, is_police):
+        Car.__init__(self, speed, color, name, is_police)
 
 
 class PoliceCar(Car):
-    pass
+    def __init__(self, speed, color, name, is_police):
+        Car.__init__(self, speed, color, name, is_police)

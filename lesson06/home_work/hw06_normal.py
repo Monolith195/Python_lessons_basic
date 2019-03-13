@@ -26,11 +26,13 @@ class Person:
 
 
 class Player(Person):
-    pass
+    def __init__(self, health, damage, armor):
+        Person.__init__(self, health, damage, armor)
 
 
 class Enemy(Person):
-    pass
+    def __init__(self, health, damage, armor):
+        Person.__init__(self, health, damage, armor)
 
 
 class Start:
